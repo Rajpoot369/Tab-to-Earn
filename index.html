@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap-to-Earn Game</title>
+    <script src='//whephiwums.com/sdk.js' data-zone='9057468' data-sdk='show_9057468'></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #tapButton, #watchAd { font-size: 24px; padding: 15px; margin: 10px; cursor: pointer; }
+        #score { font-size: 30px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Tap-to-Earn Mini App</h1>
+    <button id="tapButton">Tap Me!</button>
+    <p>Score: <span id="score">0</span></p>
+    <button id="watchAd">Watch Ad & Earn</button>
+
+    <script>
+        let score = 0;
+        document.getElementById("tapButton").addEventListener("click", function() {
+            score++;
+            document.getElementById("score").innerText = score;
+        });
+
+        // Rewarded Ad Button
+        document.getElementById("watchAd").addEventListener("click", function() {
+            show_9057468().then(() => {
+                alert('You have earned bonus coins!');
+                score += 10;
+                document.getElementById("score").innerText = score;
+            }).catch(e => {
+                alert('Ad failed to load.');
+            });
+        });
+
+        // Auto Interstitial Ads
+        show_9057468({
+            type: 'inApp',
+            inAppSettings: {
+                frequency: 2,
+                capping: 0.1,
+                interval: 120,
+                timeout: 5,
+                everyPage: false
+            }
+        });
+    </script>
+</body>
+</html>
